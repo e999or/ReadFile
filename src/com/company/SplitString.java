@@ -6,5 +6,6 @@ public class SplitString {
         String[] words = s.split(".Ret:>");
         String[] finalCheck = words[1].split("<:");
         check = finalCheck[0];
+        System.out.println(check);
     }
 }

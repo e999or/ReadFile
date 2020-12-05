@@ -5,7 +5,7 @@ import java.io.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-    BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("C:\\Users\\Eg\\Desktop\\1.txt")));
+    BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("C:\\Users\\Eg\\Desktop\\1.log")));
     FileWriter writer = new FileWriter("C:\\Users\\Eg\\Desktop\\2.txt",true);
     String line = bufferedReader.readLine();
     int i = 0;
@@ -14,7 +14,7 @@ public class Main {
                 i++;
             }
 
-            if(i == 2){
+            if(i == 1){
                 line = bufferedReader.readLine();
                 i = 0;
                 SplitString splStr = new SplitString(line);
