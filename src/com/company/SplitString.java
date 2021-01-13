@@ -1,11 +1,12 @@
 package com.company;
 
 public class SplitString {
-    String check;
+    static String check;
 
-    public SplitString(String s) {
+    public static String Check(String s) {
         String[] words = s.split(".Ret:>");//разбиваем строку до Ret:>
         String[] finalCheck = words[1].split("<:");//разбиваем строку после: <:
-        check = finalCheck[0];//получаем чек без хвостов
+        return check = finalCheck[0];//получаем чек без хвостов
     }
+
 }
