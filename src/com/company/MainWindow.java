@@ -12,6 +12,7 @@ public class MainWindow extends JFrame  {
     JButton buttonOK;
     File openFile;
 	private JTabbedPane tabbedPane;
+	private JTextField textField;
 
    MainWindow() {
    	getContentPane().setLayout(null);
@@ -31,6 +32,11 @@ public class MainWindow extends JFrame  {
    	textArea.setBounds(10, 45, 579, 281);
    	panel.add(textArea);
    	
+   	textField = new JTextField();
+   	textField.setBounds(109, 12, 183, 20);
+   	panel.add(textField);
+   	textField.setColumns(10);
+   	
    	buttonLoad = new JButton("Load file");
    	buttonLoad.setBounds(10, 11, 89, 23);
    	panel.add(buttonLoad);
@@ -40,6 +46,7 @@ public class MainWindow extends JFrame  {
             int response = fileChooser.showOpenDialog(null);
             if(response == JFileChooser.APPROVE_OPTION){
                 openFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                textField.setText(openFile.toString());
                 
             }
    		}
@@ -48,6 +55,7 @@ public class MainWindow extends JFrame  {
    	buttonOK = new JButton("OK");
    	buttonOK.setBounds(500, 11, 89, 23);
    	panel.add(buttonOK);
+   	
    	buttonOK.addActionListener(new ActionListener() {
    		public void actionPerformed(ActionEvent e) {
    			try {
@@ -59,5 +67,4 @@ public class MainWindow extends JFrame  {
    	});
    	setVisible(true);
     }
-
 }
