@@ -30,7 +30,12 @@ public class MainWindow extends JFrame  {
    	
    	textArea = new JTextArea();
    	textArea.setBounds(10, 45, 579, 281);
-   	panel.add(textArea);
+   	
+   	
+   	JScrollPane scrollPane = new JScrollPane(textArea);
+   	scrollPane.setBounds(10,43,589,294);
+   	scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+   	panel.add(scrollPane);
    	
    	textField = new JTextField();
    	textField.setBounds(109, 12, 183, 20);
