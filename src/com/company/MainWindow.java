@@ -7,12 +7,17 @@ import java.io.*;
 
 public class MainWindow extends JFrame  {
 	static JPanel panel;
+	static JPanel panelFinder;
 	static JTextArea textArea;
     JButton buttonLoad;
     JButton buttonOK;
     File openFile;
 	private JTabbedPane tabbedPane;
 	private JTextField textField;
+	private JTextArea textAreaFinder;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPaneFinder;
+	private JButton buttonOKFinder;
 
    MainWindow() {
    	getContentPane().setLayout(null);
@@ -32,7 +37,7 @@ public class MainWindow extends JFrame  {
    	textArea.setBounds(10, 45, 579, 281);
    	
    	
-   	JScrollPane scrollPane = new JScrollPane(textArea);
+   	scrollPane = new JScrollPane(textArea);
    	scrollPane.setBounds(10,43,589,294);
    	scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
    	panel.add(scrollPane);
@@ -70,6 +75,24 @@ public class MainWindow extends JFrame  {
             }
    		}
    	});
+   	
+   	panelFinder = new JPanel(null);
+   	tabbedPane.addTab("Download Finder check", null, panelFinder, null);
+   	panelFinder.setLayout(null);
+   	
+   	textAreaFinder = new JTextArea();
+   	textAreaFinder.setBounds(10, 45, 579, 281);
+   	
+   	
+   	scrollPaneFinder = new JScrollPane(textAreaFinder);
+   	scrollPaneFinder.setBounds(10,43,589,294);
+   	scrollPaneFinder.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+   	panelFinder.add(scrollPaneFinder);
+   	
+   	buttonOKFinder = new JButton("OK");
+   	buttonOKFinder.setBounds(500, 11, 89, 23);
+   	panelFinder.add(buttonOKFinder);
+   	
    	setVisible(true);
     }
 }
