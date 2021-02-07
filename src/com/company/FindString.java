@@ -1,10 +1,13 @@
 package com.company;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class FindString {
 
-    public FindString(File openFile) throws IOException {
+    static ArrayList<String> logCheck = new ArrayList<>();
+
+    public static void findStr(File openFile) throws IOException {
 
         String line;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(openFile));
@@ -18,7 +21,7 @@ public class FindString {
             if (i >= 1 && line.contains("Ret:>")) {
             	i = 0;
             	MainWindow.textArea.append(SplitString.Check(line) + "\n");
-
+            	logCheck.add(SplitString.Check(line));
             }
 
         }

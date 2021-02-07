@@ -1,31 +1,28 @@
 package com.company;
 
 import javax.swing.*;
-import java.awt.FlowLayout;
-import java.awt.event.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainWindow extends JFrame  {
 	static JPanel panel;
 	static JPanel panelFinder;
 	static JTextArea textArea;
-    JButton buttonLoad;
+	static JTextArea textAreaResult;
+	JButton buttonLoad;
     JButton buttonOK;
     File openFile;
-	private JTabbedPane tabbedPane;
-	private JTextField textField;
-	private JTextArea textAreaFinder;
-	private JScrollPane scrollPane;
-	private JScrollPane scrollPaneFinder;
-	private JButton buttonOKFinder;
+	private final JTextField textField;
+	private final JTextArea textAreaFinder;
 
-   MainWindow() {
+	MainWindow() {
    	getContentPane().setLayout(null);
    	setSize(633, 443);
    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    	setResizable(false);
-   	
-   	tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+
+   	JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
    	tabbedPane.setBounds(10, 11, 604, 365);
    	getContentPane().add(tabbedPane);
    	
@@ -35,9 +32,8 @@ public class MainWindow extends JFrame  {
    	
    	textArea = new JTextArea();
    	textArea.setBounds(10, 45, 579, 281);
-   	
-   	
-   	scrollPane = new JScrollPane(textArea);
+
+   	JScrollPane scrollPane = new JScrollPane(textArea);
    	scrollPane.setBounds(10,43,589,294);
    	scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
    	panel.add(scrollPane);
@@ -50,30 +46,27 @@ public class MainWindow extends JFrame  {
    	buttonLoad = new JButton("Load file");
    	buttonLoad.setBounds(10, 11, 89, 23);
    	panel.add(buttonLoad);
-   	buttonLoad.addActionListener(new ActionListener() {
-   		public void actionPerformed(ActionEvent e) {
-   			JFileChooser fileChooser = new JFileChooser();
-            int response = fileChooser.showOpenDialog(null);
-            if(response == JFileChooser.APPROVE_OPTION){
-                openFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
-                textField.setText(openFile.toString());
-                
-            }
-   		}
+   	buttonLoad.addActionListener(e -> {
+		   JFileChooser fileChooser = new JFileChooser();
+			int response = fileChooser.showOpenDialog(null);
+
+			if(response == JFileChooser.APPROVE_OPTION){
+				openFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
+				textField.setText(openFile.toString());
+
+			}
    	});
    	
    	buttonOK = new JButton("OK");
    	buttonOK.setBounds(500, 11, 89, 23);
    	panel.add(buttonOK);
    	
-   	buttonOK.addActionListener(new ActionListener() {
-   		public void actionPerformed(ActionEvent e) {
-   			try {
-                new FindString(openFile);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-   		}
+   	buttonOK.addActionListener(e -> {
+		   try {
+		   	 FindString.findStr(openFile);
+		   } catch (IOException ioException) {
+				ioException.printStackTrace();
+		   }
    	});
    	
    	panelFinder = new JPanel(null);
@@ -82,16 +75,36 @@ public class MainWindow extends JFrame  {
    	
    	textAreaFinder = new JTextArea();
    	textAreaFinder.setBounds(10, 45, 579, 281);
-   	
-   	
-   	scrollPaneFinder = new JScrollPane(textAreaFinder);
+
+   	JScrollPane scrollPaneFinder = new JScrollPane(textAreaFinder);
    	scrollPaneFinder.setBounds(10,43,589,294);
    	scrollPaneFinder.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
    	panelFinder.add(scrollPaneFinder);
-   	
-   	buttonOKFinder = new JButton("OK");
+
+   	JButton buttonOKFinder = new JButton("OK");
    	buttonOKFinder.setBounds(500, 11, 89, 23);
    	panelFinder.add(buttonOKFinder);
+
+	buttonOKFinder.addActionListener(e -> {
+
+		String s = textAreaFinder.getText();
+		ArrayList <String> finderCheckArr = SplitString.finderCheck(s);
+		ComparisonOfArrays.comparison(FindString.logCheck, finderCheckArr);
+
+	});
+
+	JPanel panelResult = new JPanel(null);
+	tabbedPane.addTab("Result", null, panelResult, null);
+	panelResult.setLayout(null);
+
+	textAreaResult = new JTextArea();
+	textAreaResult.setBounds(10, 45, 579, 281);
+
+	JScrollPane scrollPaneResult = new JScrollPane(textAreaResult);
+	scrollPaneResult.setBounds(10,43,589,294);
+	scrollPaneResult.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+	panelResult.add(scrollPaneResult);
+
    	
    	setVisible(true);
     }
