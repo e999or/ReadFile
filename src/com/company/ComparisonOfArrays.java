@@ -10,15 +10,11 @@ public class ComparisonOfArrays {
         Collections.sort(logChek);
         Collections.sort(finderChek);
 
-        for (int i = 0; i < logChek.size(); i++) {
-            try {
-                if (logChek.contains(finderChek.get(i)))
-                    MainWindow.textAreaResult.append(finderChek.get(i) + " Верно" + "\n");
-                else
-                    MainWindow.textAreaResult.append(logChek.get(i) + "   " + finderChek.get(i) + " Ошибка " + "\n");
-            }catch (IndexOutOfBoundsException e){
-                MainWindow.textAreaResult.append(logChek.get(i) +  " Ошибка ." + "\n");
-            }
+        for (String s : logChek) {
+            if (finderChek.contains(s))
+                MainWindow.textAreaResult.append(s + " Верно" + "\n");
+            else
+                MainWindow.textAreaResult.append(s + " Ошибка, отсутствует в finder" + "\n");
         }
     }
 }
